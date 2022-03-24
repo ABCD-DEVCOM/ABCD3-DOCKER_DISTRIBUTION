@@ -1,7 +1,7 @@
 FROM debian:stable
 RUN mkdir jdk7
 RUN apt-get update
-RUN apt-get install -y wget
+RUN apt-get upgrade -y
 RUN mkdir ABCD_SERVER
 WORKDIR jdk7/
 ADD https://download1507.mediafire.com/gpfmrqrd2o1g/chltj6lhe20lqah/jdk-7u60-linux-x64.tar.gz .
