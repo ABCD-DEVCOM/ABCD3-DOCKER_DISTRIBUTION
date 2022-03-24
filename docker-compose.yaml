@@ -1,0 +1,43 @@
+version: "3.3"
+
+services:
+  abcd:
+    depends_on:
+      - postgres
+      - jisis
+    links:
+      - postgres
+      - jisis
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ltmartin/abcd-server:latest
+    restart: on-failure
+    ports:
+    - 5800:5800
+  
+  postgres: 
+    image: postgres:9.6-alpine
+    restart: always
+    ports: 
+      - 5432:5432
+    environment: 
+     - "POSTGRES_PASSWORD=abcd+"
+     - "POSTGRES_USER=abcd_u1"
+     - "POSTGRES_DB=abcd"
+      
+    volumes: 
+      - postgres_volume:/var/lib/postgresql/data
+      - ./db/abcd.sql:/docker-entrypoint-initdb.d/abcd.sql
+  
+  jisis: 
+    image: ltmartin/j-isis_server:latest
+    restart: always
+    ports: 
+      - 1111:1111
+    volumes: 
+        - j-isis_volume:/home_example_db
+
+volumes: 
+  postgres_volume:
+  j-isis_volume:
