@@ -1,6 +1,6 @@
 FROM debian:stable
 RUN mkdir jdk7
-RUN apt install -y wget
+RUN apt-get install -y wget
 RUN mkdir ABCD_SERVER
 WORKDIR jdk7/
 RUN wget https://drive.google.com/file/d/1IDZl4E05RYBoolGm_jAoeMbIhr1Q_T82/view?usp=sharing
